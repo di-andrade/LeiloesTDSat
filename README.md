@@ -8,3 +8,7 @@ Sistema desktop para auxiliar as rotinas de uma casa de leiloes. O projeto permi
 - Java Swing
 - Apache NetBeans
 - MySQL ou MariaDB
+
+
+
+
