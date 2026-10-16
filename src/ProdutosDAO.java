@@ -40,6 +40,26 @@ public class ProdutosDAO {
         }
     }
 
+    public boolean venderProduto(int id) {
+        String sql = "UPDATE produtos SET status = ? WHERE id = ? AND status <> ?";
+
+        try (Connection conexao = new conectaDAO().connectDB()) {
+            if (conexao == null) {
+                return false;
+            }
+
+            try (PreparedStatement comando = conexao.prepareStatement(sql)) {
+                comando.setString(1, "Vendido");
+                comando.setInt(2, id);
+                comando.setString(3, "Vendido");
+                return comando.executeUpdate() == 1;
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Nao foi possivel vender o produto: " + erro.getMessage());
+            return false;
+        }
+    }
+
     public ArrayList<ProdutosDTO> listarProdutos(){
         ArrayList<ProdutosDTO> produtos = new ArrayList<>();
         String sql = "SELECT id, nome, valor, status FROM produtos ORDER BY id";
